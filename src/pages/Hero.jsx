@@ -3,7 +3,12 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// ✅ Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
+
+// ✅ Import local images
+import hawaMahalImg from "../assets/jaipur/h2.png";
+import borderImg from "../assets/jaipur/border.png";
 
 const Hero = () => {
   const cloudLeft = useRef(null);
@@ -11,7 +16,12 @@ const Hero = () => {
   const hawaMahal = useRef(null);
   const heroSection = useRef(null);
 
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     // Hero section height
@@ -78,13 +88,13 @@ const Hero = () => {
   }, []);
 
   return (
-   <div
-  ref={heroSection}
-  className="relative w-full h-screen overflow-hidden bg-cover bg-center"
-  style={{
-    backgroundImage: `url('https://images.stockcake.com/public/7/3/a/73a45466-35f5-4456-b961-1d36c3769efc_large/peaceful-pixel-sky-stockcake.jpg')`,
-  }}
->
+    <div
+      ref={heroSection}
+      className="relative w-full h-screen overflow-hidden bg-cover bg-center"
+      style={{
+        backgroundImage: `url('https://images.stockcake.com/public/7/3/a/73a45466-35f5-4456-b961-1d36c3769efc_large/peaceful-pixel-sky-stockcake.jpg')`,
+      }}
+    >
       {/* Clouds */}
       <img
         ref={cloudLeft}
@@ -101,76 +111,86 @@ const Hero = () => {
 
       {/* Centered Title and Countdown */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20 w-full px-4">
-     <motion.h1
-  className="relative z-20 text-4xl md:text-6xl font-bold text-white mb-4 
-             drop-shadow-[0_0_12px_rgba(0,0,0,0.85)] leading-tight"
->
-  HackAryaVerse <span className="text-indigo-300 drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]">2.0</span>
-</motion.h1>
+        <motion.h1 className="relative z-20 text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-[0_0_12px_rgba(0,0,0,0.85)] leading-tight">
+          HackAryaVerse{" "}
+          <span className="text-indigo-300 drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]">
+            2.0
+          </span>
+        </motion.h1>
 
-<motion.p
-  className="relative z-20 text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto 
-             drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]"
->
-  The Palace of Winds in the Pink City of Jaipur
-</motion.p>
+        <motion.p className="relative z-20 text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]">
+          The Palace of Winds in the Pink City of Jaipur
+        </motion.p>
 
-{/* Countdown Cards */}
-<motion.div
-  className="mt-6 flex flex-wrap justify-center gap-4"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay:0.25, duration: 1 }}
->
-  {["days", "hours", "minutes", "seconds"].map((unit) => (
-    <motion.div
-      key={unit}
-      className="bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-800 
-                 border border-white/20 rounded-xl shadow-lg 
-                 min-w-[70px] flex flex-col items-center md:p-4 p-2"
-    >
-      <span className="text-xl md:text-3xl font-bold text-white font-mono drop-shadow-[0_0_6px_rgba(0,0,0,0.8)]">
-        {timeLeft[unit]}
-      </span>
-      <span className="text-xs uppercase text-gray-300">{unit}</span>
-    </motion.div>
-  ))}
-</motion.div>
-
+        {/* Countdown Cards */}
+        <motion.div
+          className="mt-6 flex flex-wrap justify-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.25, duration: 1 }}
+        >
+          {["days", "hours", "minutes", "seconds"].map((unit) => (
+            <motion.div
+              key={unit}
+              className="bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-800 border border-white/20 rounded-xl shadow-lg min-w-[70px] flex flex-col items-center md:p-4 p-2"
+            >
+              <span className="text-xl md:text-3xl font-bold text-white font-mono drop-shadow-[0_0_6px_rgba(0,0,0,0.8)]">
+                {timeLeft[unit]}
+              </span>
+              <span className="text-xs uppercase text-gray-300">{unit}</span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Hawa Mahal Image */}
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full flex justify-center z-0">
         <img
           ref={hawaMahal}
-          src="src/assets/jaipur/h2.png"
+          src={hawaMahalImg}
           alt="Hawa Mahal"
           className="w-full brightness-95 object-contain pointer-events-none"
         />
       </div>
 
       {/* Scroll Indicator */}
-     <motion.div
-  className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col 
-             items-center text-white z-30 drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 2, duration: 1 }}
->
-  <span className="text-m font-bold mb-2 animate-pulse">Scroll Down</span>
-  <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
-    <svg
-      className="w-6 h-6 animate-bounce"
-      fill="none"
-      stroke="white"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-    </svg>
-  </motion.div>
-</motion.div>
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white z-30 drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
+        <span className="text-m font-bold mb-2 animate-pulse">Scroll Down</span>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          <svg
+            className="w-6 h-6 animate-bounce"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </motion.div>
+      </motion.div>
 
+      {/* Decorative Border */}
+      <div
+        className="w-full absolute bottom-0 z-20"
+        style={{
+          height: "80px",
+          backgroundImage: `url(${borderImg})`,
+          backgroundRepeat: "repeat-x",
+          backgroundSize: "contain",
+        }}
+      ></div>
     </div>
   );
 };
